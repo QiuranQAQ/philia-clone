@@ -1,71 +1,76 @@
-/* 全局重置 */
+/* --- 核心变量设置 (在这里微调颜色) --- */
+:root {
+    /* 背景不是纯黑，是极深的炭黑 */
+    --bg-color: #050505;
+    
+    /* 默认文字是暗淡的灰色，模拟未激活状态 */
+    --text-dim: #666666;
+    
+    /* 主文字是亮灰，不是纯白，避免刺眼 */
+    --text-main: #bfbfbf;
+    
+    /* 高亮状态才是纯白，带光晕 */
+    --text-highlight: #ffffff;
+    
+    /* 选中文字时的背景色（原站风格） */
+    --selection-bg: #ffffff;
+    --selection-text: #000000;
+}
+
+/* --- 全局样式 --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: default; /* 保持默认光标，或者你可以找个十字准星图片 */
+    cursor: default; 
+}
+
+::selection {
+    background: var(--selection-bg);
+    color: var(--selection-text);
 }
 
 body {
-    background-color: #000000;
-    color: #ffffff;
-    /* 关键：使用衬线字体复刻原作的哥特/严肃感 */
-    font-family: 'Times New Roman', Times, serif; 
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    /* 字体栈：优先使用衬线体，营造神秘/档案感 */
+    font-family: "Times New Roman", "Songti SC", "SimSun", serif;
     height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
-    letter-spacing: 2px; /* 宽字间距 */
+    
+    /* 关键：抗锯齿渲染 */
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* 链接样式 */
-a {
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.5s ease;
-    opacity: 0.7;
-}
-
-a:hover {
-    opacity: 1;
-    letter-spacing: 4px; /* 悬停拉伸效果 */
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-}
-
-/* 加载层 */
+/* --- 加载层 (Loader) --- */
 .loader-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: var(--bg-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 100;
-    transition: opacity 1.5s ease, filter 1.5s ease;
+    transition: opacity 1s ease;
 }
 
 .loader-text {
-    font-size: 2rem;
-    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace; /* 加载数字用等宽字体 */
+    font-size: 1.5rem;
+    color: var(--text-dim); /* 暗灰色 */
+    letter-spacing: 2px;
 }
 
-.loader-subtext {
-    margin-top: 10px;
-    font-size: 0.8rem;
-    opacity: 0.5;
-    font-style: italic;
-    animation: blink 2s infinite;
-}
-
-/* Enter 按钮层 */
+/* --- Enter 按钮层 --- */
 #enter-screen {
     position: fixed;
     top: 0;
@@ -76,81 +81,125 @@ a:hover {
     justify-content: center;
     align-items: center;
     z-index: 90;
-    background: #000;
-    transition: opacity 2s ease;
+    background: var(--bg-color);
+    transition: opacity 1.5s ease;
 }
 
 .enter-btn {
-    font-size: 1.2rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: var(--text-dim); /* 默认暗淡 */
     cursor: pointer;
+    padding: 15px 30px;
     border: 1px solid transparent;
-    padding: 10px 20px;
-    transition: all 0.5s;
-    animation: breathe 3s infinite ease-in-out;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 3px;
 }
 
 .enter-btn:hover {
-    border: 1px solid #fff;
-    background: rgba(255, 255, 255, 0.1);
-    letter-spacing: 5px;
+    color: var(--text-highlight);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* 发光效果 */
+    letter-spacing: 6px; /* 拉伸动画 */
 }
 
-/* 主内容层 */
+/* --- 主内容层 --- */
 .content-container {
     width: 100%;
-    max-width: 800px;
-    height: 100%;
+    max-width: 900px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* 上下对齐 */
+    justify-content: space-between;
     align-items: center;
-    padding: 50px 20px;
+    padding: 60px 20px;
     opacity: 0;
-    filter: blur(10px); /* 初始模糊 */
-    transition: opacity 2s ease, filter 2s ease;
+    filter: blur(8px); /* 初始模糊 */
+    transition: opacity 2.5s ease, filter 2.5s ease;
 }
 
+/* LOGO 样式 */
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 5px;
-    margin-top: 20px;
-    text-transform: uppercase;
+    font-size: 1.2rem;
+    letter-spacing: 8px;
+    color: var(--text-main);
+    font-weight: normal;
+    opacity: 0.9;
+    margin-top: 40px;
 }
 
+/* 中间诗句/文字 */
 .poem {
     text-align: center;
-    line-height: 2;
-    margin-bottom: 50px;
+    font-size: 1rem;
+    line-height: 2.2;
+    color: #999999; /* 特定灰色 */
     font-style: italic;
-    color: #ddd;
+    max-width: 600px;
 }
 
+.poem p {
+    margin-bottom: 15px;
+    transition: color 0.5s ease;
+}
+
+.poem p:hover {
+    color: var(--text-highlight);
+    text-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+
+/* 菜单链接 */
 .menu {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
+    margin-bottom: 60px;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    text-decoration: none;
+    group: 1;
 }
 
 .index {
+    font-family: 'Courier New', monospace;
     font-size: 0.7rem;
-    opacity: 0.5;
+    color: #444444; /* 序号非常暗，几乎看不见 */
+    transition: color 0.3s ease;
 }
 
-.footer {
+.label {
+    font-size: 0.9rem;
+    color: var(--text-dim); /* 链接默认是暗的 */
+    letter-spacing: 2px;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+/* 悬停特效：核心复刻点 */
+.menu-item:hover .index {
+    color: var(--text-main);
+}
+
+.menu-item:hover .label {
+    color: var(--text-highlight);
+    letter-spacing: 4px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+}
+
+/* 底部 */
+.copyright {
+    font-family: 'Courier New', monospace;
     font-size: 0.6rem;
-    opacity: 0.3;
-    margin-bottom: 20px;
+    color: #333333; /* 极暗 */
+    letter-spacing: 1px;
 }
 
-/* 辅助类：控制显示隐藏 */
+/* 辅助类 */
 .hidden {
     display: none !important;
 }
@@ -165,26 +214,15 @@ a:hover {
     filter: blur(0px);
 }
 
-/* 关键帧动画 */
-@keyframes blink {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 0.8; }
-}
-
-@keyframes breathe {
-    0%, 100% { text-shadow: 0 0 2px #fff; opacity: 0.8; }
-    50% { text-shadow: 0 0 10px #fff; opacity: 1; }
-}
-
-/* 背景噪点 (Film Grain) 模拟复古感 */
+/* 噪点遮罩（模拟胶片感） */
 .noise {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
-    z-index: 999;
-    opacity: 0.05;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAA5OTkAAABMTExERERmZmYzMzO/v799271jAAAACHRSTlMAMwA1MzMzM7O0s14AAABPSURBVDjL7c0xDcBAEAMxTE1/ycbOBQcYIHSvuO8/0W48MyzWbLerV9fr8Xq9/n6/P8/z/H6/P8/z/H6/P8/z/H6/P8/z/H6/P8/z/H4fP06EI1W3+pWyAAAAAElFTkSuQmCC');
+    z-index: 9999;
+    opacity: 0.08; /* 调整透明度 */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
 }

@@ -7,23 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 噪点层，放在最上面 -->
+    <div class="noise"></div>
 
-    <!-- 进场加载层 -->
+    <!-- 加载层 -->
     <div id="loader" class="loader-container">
         <div class="loader-text">
             <span id="progress">0</span>%
         </div>
-        <div class="loader-subtext">INITIALIZING ASSETS...</div>
     </div>
 
-    <!-- 点击进入层 (Enter Screen) -->
+    <!-- 点击进入 -->
     <div id="enter-screen" class="hidden">
         <div class="enter-btn" onclick="enterSite()">
-            [ ENTER ]
+            [ ENTER_ARCHIVE ]
         </div>
     </div>
 
-    <!-- 主内容层 -->
+    <!-- 主页面 -->
     <div id="main-content" class="hidden content-container">
         <header>
             <div class="logo">PHILIA093</div>
@@ -31,37 +32,33 @@
 
         <main>
             <div class="poem">
-                <p>The void is not empty.</p>
-                <p>It is full of what you cannot see.</p>
+                <p>Reality is a construct of memory.</p>
+                <p>Assets loaded successfully.</p>
+                <p>Welcome back, Cyrene.</p>
             </div>
 
             <nav class="menu">
                 <a href="#" class="menu-item">
-                    <span class="index">01.</span>
-                    <span class="label">ARCHIVE</span>
+                    <span class="index">01</span>
+                    <span class="label">DATA_LOGS</span>
                 </a>
                 <a href="#" class="menu-item">
-                    <span class="index">02.</span>
+                    <span class="index">02</span>
                     <span class="label">VISUALS</span>
                 </a>
                 <a href="#" class="menu-item">
-                    <span class="index">03.</span>
-                    <span class="label">LOGS</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <span class="index">04.</span>
-                    <span class="label">CONTACT</span>
+                    <span class="index">03</span>
+                    <span class="label">COMMUNICATION</span>
                 </a>
             </nav>
         </main>
 
         <footer>
-            <div class="copyright">© 2024 SYSTEM_FAILURE</div>
+            <div class="copyright">
+                © 2024 MIHOYO TECHNOLOGY (SHANGHAI) CO., LTD
+            </div>
         </footer>
     </div>
-
-    <!-- 背景噪音层（增加质感） -->
-    <div class="noise"></div>
 
     <script src="script.js"></script>
 </body>
