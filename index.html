@@ -2,37 +2,162 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>philia093 [REPLICA]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>philia093</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- 引入类似的等宽字体 -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #000000;
+            --text-color: #cccccc;
+            --accent-color: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier Prime', monospace;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            cursor: crosshair; /* 复古光标 */
+        }
+
+        /* 模拟旧显示器微光 */
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(20,20,20,0) 60%, rgba(0,0,0,1) 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .container {
+            z-index: 20;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s forwards 0.5s;
+        }
+
+        h1 {
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .main-text {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: var(--accent-color);
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+
+        .links {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s, letter-spacing 0.3s;
+        }
+
+        a:hover {
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px #fff;
+        }
+
+        /* 底部版权 */
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 10px;
+            color: #333;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* 简单的故障闪烁效果 */
+        .glitch-effect {
+            animation: flicker 4s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            95% { opacity: 1; }
+            96% { opacity: 0.8; }
+            97% { opacity: 1; }
+            98% { opacity: 0.5; }
+            99% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- CRT 扫描线效果层 -->
-    <div class="scanlines"></div>
-
     <div class="container">
-        <!-- 故障文字效果标题 -->
-        <h1 class="glitch" data-text="PHILIA093">PHILIA093</h1>
+        <h1>PHILIA093</h1>
         
-        <div class="content">
-            <p id="typing-text"></p>
+        <!-- 这里是核心文字，原站会变 -->
+        <div class="main-text glitch-effect">
+            See you tomorrow.
         </div>
 
-        <!-- 链接列表 -->
         <div class="links">
-            <a href="#" target="_blank">[ INSTAGRAM ]</a>
-            <a href="#" target="_blank">[ TWITTER ]</a>
-            <a href="#" target="_blank">[ EMAIL ]</a>
-        </div>
-        
-        <div class="footer">
-            &copy; 2024 SYSTEM_OFFLINE
+            <a href="#" target="_blank">ENTRY // 01</a>
+            <a href="#" target="_blank">ARCHIVE // 02</a>
+            <a href="mailto:cyrene@philia093.com">CONTACT</a>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="footer">
+        © 2025 SYSTEM_RESTORATION // ALL RIGHTS RESERVED
+    </div>
+
+    <script>
+        // 模拟简单的文字变化逻辑
+        const textElement = document.querySelector('.main-text');
+        const texts = ["See you tomorrow.", "Loading...", "System Check", "!"];
+        let index = 0;
+
+        // 点击页面播放声音（如果你有mp3文件，去掉注释）
+        /*
+        document.body.addEventListener('click', () => {
+            const audio = new Audio('TruE.mp3'); // 确保你有这个文件
+            audio.play();
+        }, { once: true });
+        */
+
+        // 每隔几秒随机变字，模仿原站的神秘感
+        setInterval(() => {
+            if(Math.random() > 0.8) {
+                const randomText = texts[Math.floor(Math.random() * texts.length)];
+                const originalText = textElement.innerText;
+                textElement.innerText = randomText;
+                
+                setTimeout(() => {
+                    textElement.innerText = originalText;
+                }, 200);
+            }
+        }, 3000);
+    </script>
 </body>
 </html>
